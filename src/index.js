@@ -5,7 +5,6 @@ import {OpeningHours} from './OpeningHours';
 const App = () => {
     return (
         <>
-            <>Opening hours</>
             <OpeningHours/>
         </>
     )
