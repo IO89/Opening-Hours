@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {OpeningHours} from './OpeningHours';
+import {OpenHours} from './OpenHours';
 
 const App = () => {
     return (
         <>
-            <OpeningHours/>
+            <h2>Opening hours</h2>
+            <OpenHours/>
         </>
     )
 };
