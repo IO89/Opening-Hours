@@ -37,8 +37,8 @@ export const OpenHours = () => {
     // This one is tricky!
     // Compare day an next day and move close time to previous day
     const renderOpenHours = (day, nextDay) => {
-        let isOpen = false;
         let acc = [];
+        let isOpen = false;
 
         for (const item of day) {
             // If restaurant has type open or has type close but still open for today,push formatted hours to acc
@@ -57,6 +57,7 @@ export const OpenHours = () => {
         // Empty array if restaurant is closed fro today
         return day.length === 0 ? 'Closed' : acc;
     };
+
 
     // Map over state and return schedule list
     const renderOpenHoursList = daysArray.map((day, index) => {
