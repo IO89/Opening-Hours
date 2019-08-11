@@ -1,0 +1,27 @@
+body {
+    background: #f8f8f8;
+}
+#title{
+    font-family: CircularStd, Serif;
+    font-size: 24px;
+    color:#202125;
+    border-bottom: 1px solid;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+td{
+    font-family: CircularStd,Serif;
+    border-bottom: 1px solid rgba(32,33,37,0.08);
+}
+tr{
+    font-family: CircularStd,Serif;
+    font-size: 16px;
+
+}
+#box{
+    color:#FFFFFF;
+    margin-top: 20px;
+}
+#content{
+    padding: 30px 30px 30px 30px;
+}

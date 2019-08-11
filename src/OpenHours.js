@@ -26,6 +26,7 @@ export const OpenHours = () => {
             // If over 12 then concat PM otherwise concat AM
             return utcHours > 12 ? utcHours - 12 + 'PM' : utcHours + 'AM';
         };
+
         return (
             <span>
                     {formatAMPM(days.value)}
@@ -55,21 +56,24 @@ export const OpenHours = () => {
             acc.push(formatHours(nextDay[0]))
         }
         // Empty array if restaurant is closed fro today
-        return day.length === 0 ? 'Closed' : acc;
+        return day.length === 0 ? <td className="ui right aligned disabled">Closed</td> :
+            <td className="ui right aligned"><b>{acc}</b></td>;
     };
 
 
     // Map over state and return schedule list
     const renderOpenHoursList = daysArray.map((day, index) => {
         return (
-            <ul>
-                <li key={day}>
-                    {capitalizeWeekday(day)}
+            <table className="ui unstackable very basic table">
+                <tbody>
+                <tr key={day}>
+                    <td className="ui left aligned"><b>{capitalizeWeekday(day)}</b></td>
                     {/* Also tricky!*/}
                     {/*call renderOpenHours with day and next day*/}
                     {renderOpenHours(schedule[day], schedule[daysArray[index + 1]])}
-                </li>
-            </ul>
+                </tr>
+                </tbody>
+            </table>
         );
     });
 
