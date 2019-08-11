@@ -12,12 +12,6 @@ export const OpenHours = () => {
         return day.charAt(0).toUpperCase() + day.slice(1)
     };
 
-    const today = () => {
-        return new Date().toLocaleString('en-Us', {
-            weekday: 'long',
-        })
-    };
-
     const formatHours = (days) => {
         // Get time in milliseconds and then get hours in AM/PM format
         const formatAMPM = (time) => {
@@ -56,10 +50,15 @@ export const OpenHours = () => {
             acc.push(formatHours(nextDay[0]))
         }
         // Empty array if restaurant is closed fro today
-        return day.length === 0 ? <td className="ui right aligned disabled">Closed</td> :
+        return day.length === 0 ? <td id="closed" className="ui right aligned disabled">Closed</td> :
             <td className="ui right aligned"><b>{acc}</b></td>;
     };
 
+    const today = () => {
+        return new Date().toLocaleString('en-Us', {
+            weekday: 'long',
+        }).toLowerCase()
+    };
 
     // Map over state and return schedule list
     const renderOpenHoursList = daysArray.map((day, index) => {
@@ -67,7 +66,10 @@ export const OpenHours = () => {
             <table className="ui unstackable very basic table">
                 <tbody>
                 <tr key={day}>
-                    <td className="ui left aligned"><b>{capitalizeWeekday(day)}</b></td>
+                    <td className="ui left aligned">
+                        <b>{capitalizeWeekday(day)}</b>
+                        {today()===day && <span id="today"><b>TODAY</b></span>}
+                    </td>
                     {/* Also tricky!*/}
                     {/*call renderOpenHours with day and next day*/}
                     {renderOpenHours(schedule[day], schedule[daysArray[index + 1]])}

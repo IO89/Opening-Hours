@@ -8,7 +8,7 @@ const App = () => {
         <div id="box" className="ui card centered">
             <div id="content" className="content">
             <h1 id="title" className="ui header">
-                <i className="mini clock outline icon disabled"></i>
+                <i className=" mini clock outline icon disabled"/>
                 Opening hours
             </h1>
             <OpenHours/>
