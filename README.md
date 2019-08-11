@@ -11,6 +11,7 @@ Shows opening hours of hypothetical restaurant from data.json file which has for
     }
   ],`
 Time is given in seconds which then converted to hours in AM/PM format.
+
  If array of time is empty then a restaurant is closed.
  Restaurant might be open in one day and closed in next day, for example restaurant is open on Friday at 10AM and closes on Saturday 1AM
  ,in this case opening hours are displayed as Friday 10AM-1AM.
@@ -19,5 +20,5 @@ Time is given in seconds which then converted to hours in AM/PM format.
  ### Run locally
  Clone repo and run: `npm i` and then `npm start` to run development server locally.
  
- ###Further improvement
+ ### Further improvement
  One might fetch hours from endpoint and display 
