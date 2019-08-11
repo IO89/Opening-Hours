@@ -18,5 +18,6 @@ Time is given in seconds which then converted to hours in AM/PM format.
  Demo available here: `https://opening-hours-m7uhz5x1c.now.sh/`
  ### Run locally
  Clone repo and run: `npm i` and then `npm start` to run development server locally.
-###Further improvement
-One might fetch hours from endpoint and display 
+ 
+ ###Further improvement
+ One might fetch hours from endpoint and display 
