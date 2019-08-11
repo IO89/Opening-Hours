@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Hours} from './Hours'
 import data from './data';
 
 export const OpenHours = () => {
@@ -19,7 +18,7 @@ export const OpenHours = () => {
         })
     };
 
-    const renderHours = (values) => {
+    const formatHours = (days) => {
         // Get time in milliseconds and then get hours in AM/PM format
         const formatAMPM = (time) => {
             // Have to use UTC data otherwise it takes in account time offset
@@ -27,26 +26,47 @@ export const OpenHours = () => {
             // If over 12 then concat PM otherwise concat AM
             return utcHours > 12 ? utcHours - 12 + 'PM' : utcHours + 'AM';
         };
-        // If array is empty then restaurant is closed else show open hours
-        return values.length === 0 ? <span> {'Closed'} </span> : values.map(time => {
-            return (
-                <span>
-                    {formatAMPM(time.value)}
-                    {/*If type is open then add - between values if close empty string */}
-                    {time.type === 'open' ? ' - ' : ''}</span>
-            )
-        })
-    };
+        return (
+            <span>
+                    {formatAMPM(days.value)}
+                {/*If type is open then add - between values if close empty string */}
+                {days.type === 'open' ? ' - ' : ''}</span>
+        )
 
+    };
+    // This one is tricky!
+    // Compare day an next day and move close time to previous day
+    const renderOpenHours = (day, nextDay) => {
+        let isOpen = false;
+        let acc = [];
+
+        for (const item of day) {
+            // If restaurant has type open or has type close but still open for today,push formatted hours to acc
+            if (item.type === 'open') {
+                acc.push(formatHours(item))
+            } else if (item.type === 'close' && isOpen) {
+                acc.push(formatHours(item))
+            }
+            // Set flag to true if type open
+            isOpen = item.type === 'open';
+        }
+        // If still open take closing time from next day
+        if (isOpen) {
+            acc.push(formatHours(nextDay[0]))
+        }
+        // Empty array if restaurant is closed fro today
+        return day.length === 0 ? 'Closed' : acc;
+    };
 
     // Map over state and return schedule list
     const renderOpenHoursList = daysArray.map((day, index) => {
-        console.log('see if works', data[Object.keys(schedule)[index + 1]]);
         return (
             <ul>
                 <li key={day}>
                     {capitalizeWeekday(day)}
-                    {renderHours(schedule[day])}
+                    {/* Also tricky!*/}
+                    {/*call renderOpenHours with day and next day*/}
+                    {renderOpenHours(schedule[day], schedule[daysArray[index + 1]])}
                 </li>
             </ul>
         );
